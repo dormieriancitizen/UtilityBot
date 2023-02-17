@@ -31,4 +31,6 @@ commandlist = {
   "stop":c.botutils.stop,
   "restart":c.botutils.restart,
   "schedule":scheduler.send,
+  "scratchset":c.scrax.set,
+  "longmessage":c.annoy.longmessage
 }

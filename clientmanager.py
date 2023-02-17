@@ -35,7 +35,7 @@ class bot(discord.Client):
     os.system('clear')
     print(f'{style.reset} Logged on as {style.user} {self.user}')
 
-    await discord.get_channel(1022132262503989313).send(f' UtilBot logged on as {self.user}')
+    await self.get_channel(1022132262503989313).send(f' UtilBot logged on as {self.user}')
 
   async def on_message(self, message):
     # print(message.guild.id)

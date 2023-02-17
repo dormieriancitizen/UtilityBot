@@ -1,4 +1,4 @@
-import time, math
+import time, math, more_itertools
 from colorama import init, Fore, Style
 init()
 
@@ -55,3 +55,14 @@ async def allchannelsend(args,message,self):
 
   await message.delete()
   return False
+
+async def longmessage(args,message,self):
+  if not self.ver:
+    return "no"
+  with open("./config/longmessage.txt",'r') as scratchfile:
+    script =  list(more_itertools.sliced("\n".join(scratchfile.readlines()),1990))
+    for i in script:
+      await message.channel.send(i)
+      time.sleep(0.2)
+    await message.delete()
+    return False

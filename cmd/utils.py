@@ -30,6 +30,8 @@ async def nuke(args, message, self):
 
 
 async def sendembed(args, message, self):
+  if not self.ver:
+    return "no"
   print(args)
   i = 0
   for arg in args:
@@ -56,6 +58,8 @@ async def sendembed(args, message, self):
   await message.delete()
 
 async def status(args,message,self):
+  if not self.ver:
+    return "no"
   activity = discord.Game(name=' '.join(args))
   await self.change_presence(status=discord.Status.online, activity=activity)
   await message.delete()
