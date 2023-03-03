@@ -1,2 +1,4 @@
 *
 !.gitignore
+
+#files ignored: longmessage.txt, scratch.txt, token.txt, webhookurl.txt

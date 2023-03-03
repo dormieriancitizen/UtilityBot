@@ -2,7 +2,17 @@ import time, math, more_itertools
 from colorama import init, Fore, Style
 init()
 
-
+async def everyone(args,message,self):
+  if not self.ver:
+    return "nu"
+    
+  amount = args.pop(0)
+  msg = math.floor(1990/len(emojiofpain))*emojiofpain
+  await message.channel.send("haha L")
+  for i in range(int(amount)):
+    time.sleep(0.05)
+    await message.channel.send(msg)
+  return "Dun"
 
 async def lag(args,message,self):
   try:
