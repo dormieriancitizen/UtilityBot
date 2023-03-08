@@ -20,7 +20,7 @@ async def chat(args,message,self):
     return False
 
 async def chatedit(args,message,self):
-    message.edit("** **")
+    await message.edit(content="** **")
 
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
