@@ -34,5 +34,5 @@ commandlist = {
   "scratchset":c.scrax.set,
   "longmessage":c.annoy.longmessage,
   "chatgpt":c.chatwithgpt.chat,
-  "chatwithgpt":c.chatwithgpt.chat,
+  "chatwithgpt":c.chatwithgpt.chatedit,
 }

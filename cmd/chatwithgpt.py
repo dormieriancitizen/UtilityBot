@@ -18,3 +18,17 @@ async def chat(args,message,self):
     
     await reply.edit(content=response['choices'][0]['message']['content'])
     return False
+
+async def chatedit(args,message,self):
+    message.edit("** **")
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": " ".join(args)},
+        ],
+        temperature=0,
+    )
+    
+    await message.edit(content=response['choices'][0]['message']['content'])
+    return False
