@@ -41,24 +41,19 @@ class bot(discord.Client):
     # print(message.guild.id)
     # print(self.blockedservers)
     # print(message.guild.id in self.blockedservers)
-    try:
-      if message.guild.id in self.blockedservers:
-        return
-    except AttributeError:
-      pass
 
     for item in set.responses:
+      if message.guild.id in self.blockedservers:
+        break
       if item in message.content.lower():
         await message.reply(set.responses[item])
         print(f"{style.log} sent {style.sent}{set.responses[item]}")
         break
+    
+    self.ver = message.author.id in self.auth or message.author == self.user
 
-    if message.content.startswith(set.prefix):
-      self.ver = message.author.id in self.auth or message.author == self.user
-
-      print(
-        f"{style.log} recieved command {style.command}{message.content} from {style.user}{message.author}"
-      )
+    if message.content.startswith(set.prefix) and self.ver:
+      print(f"{style.log} recieved command {style.command}{message.content} from {style.user}{message.author}")
 
       m = message.content.split(set.prefix)[1]
       m = m.split(' ')

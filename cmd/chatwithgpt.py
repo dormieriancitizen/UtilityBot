@@ -11,7 +11,7 @@ async def chat(args,message,self):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "user", "content": args[0]},
+            {"role": "user", "content": " ".join(args)},
         ],
         temperature=0,
     )
