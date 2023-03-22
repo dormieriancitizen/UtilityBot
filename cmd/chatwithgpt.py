@@ -7,7 +7,6 @@ with open("./config/openaitoken.txt",'r') as token:
 
 async def chat(args,message,self):
     reply = await message.reply("oki thinking")
-
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
@@ -30,5 +29,5 @@ async def chatedit(args,message,self):
         temperature=0,
     )
     
-    await message.edit(content=response['choices'][0]['message']['content'])
+    await message.edit(content="**This is a message created by ChatGPT: **"+response['choices'][0]['message']['content'])
     return False
