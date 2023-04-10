@@ -35,4 +35,6 @@ commandlist = {
   "longmessage":c.annoy.longmessage,
   "chatgpt":c.chatwithgpt.chat,
   "chatwithgpt":c.chatwithgpt.chatedit,
+  "everyone":c.annoy.falseeveryone,
+  "notquiteeveryone":c.annoy.untrueeveryone
 }

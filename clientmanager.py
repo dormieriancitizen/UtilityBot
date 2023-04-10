@@ -1,14 +1,14 @@
-import os, time, aiohttp
-
+import os, time
 import discord
 
 import settings.settings as set
 import settings.style as style
 import commands as cme
+import robloxtracker
 
 class bot(discord.Client):
-
   def __init__(self):
+    self.oldrblx = {'userPresenceType':-1}
     self.auth = []
     self.blockedservers = []
     self.uptime = time.time()
@@ -50,7 +50,12 @@ class bot(discord.Client):
         print(f"{style.log} sent {style.sent}{set.responses[item]}")
         break
     
-    self.ver = message.author.id in self.auth or message.author == self.user
+    rblx = robloxtracker.game()
+    if rblx['userPresenceType']==2 and self.oldrblx['userPresenceType'] != rblx['userPresenceType']:
+      await self.change_presence(activity=discord.Game(name=f"Roblox: {rblx['lastLocation']}"))
+    self.oldrblx=rblx
+
+    self.ver = True
 
     if message.content.startswith(set.prefix) and self.ver:
       print(f"{style.log} recieved command {style.command}{message.content} from {style.user}{message.author}")
@@ -72,6 +77,5 @@ class bot(discord.Client):
         print(f"{style.log} sent {style.sent}{response}")
     else:
       return
-
 
 client = bot()

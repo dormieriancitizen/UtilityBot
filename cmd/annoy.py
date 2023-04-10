@@ -73,6 +73,26 @@ async def longmessage(args,message,self):
     script =  list(more_itertools.sliced("\n".join(scratchfile.readlines()),1990))
     for i in script:
       await message.channel.send(i)
-      time.sleep(0.2)
+      asyncio.sleep(0.2)
     await message.delete()
     return False
+
+async def falseeveryone(args,message,self):
+  membersend = "" 
+  for member in message.guild.members:
+            membersend=membersend+member.mention
+  await message.delete()
+  members =  list(more_itertools.sliced("\n".join(membersend),1990))
+  for member in members:
+      await message.channel.send(membersend)
+  return False
+
+async def untrueeveryone(args,message,self):
+  membersend = "" 
+  for member in message.guild.members:
+            membersend=membersend+"@​"+member.name+"\n"
+  await message.delete()
+  members =  list(more_itertools.sliced("\n".join(membersend),1990))
+  for member in members:
+      await message.channel.send(membersend)
+  return False
