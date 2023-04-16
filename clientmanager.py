@@ -1,4 +1,4 @@
-import os, time
+import os, time, asyncio
 import discord
 
 import settings.settings as set
@@ -22,9 +22,6 @@ class bot(discord.Client):
       for user in serverlist.readlines():
         self.blockedservers.append(int(user))
 
-    print("Loaded")
-    time.sleep(0.01)
-
     print("Logging on...")
     super().__init__()
 
@@ -35,6 +32,7 @@ class bot(discord.Client):
     print(f'{style.reset} Logged on as {style.user} {self.user}')
 
     await self.get_channel(1022132262503989313).send(f' UtilBot logged on as {self.user}')
+    await asyncio.create_task(robloxtracker.task(self))
 
   async def on_message(self, message):
     # print(message.guild.id)
