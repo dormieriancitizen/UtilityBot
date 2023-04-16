@@ -8,7 +8,6 @@ import robloxtracker
 
 class bot(discord.Client):
   def __init__(self):
-    self.oldrblx = {'userPresenceType':-1}
     self.auth = []
     self.blockedservers = []
     self.uptime = time.time()
@@ -49,12 +48,7 @@ class bot(discord.Client):
         await message.reply(set.responses[item])
         print(f"{style.log} sent {style.sent}{set.responses[item]}")
         break
-    
-    rblx = robloxtracker.game()
-    if rblx['userPresenceType']==2 and self.oldrblx['userPresenceType'] != rblx['userPresenceType']:
-      await self.change_presence(activity=discord.Game(name=f"Roblox: {rblx['lastLocation']}"))
-    self.oldrblx=rblx
-
+  
     self.ver = True
 
     if message.content.startswith(set.prefix) and self.ver:

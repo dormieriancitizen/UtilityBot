@@ -12,7 +12,6 @@ import clientmanager
 
 def logOn():
   try:
-
     with open("./config/token.txt",'r') as file:
         token = file.read().rstrip()
 
