@@ -9,7 +9,7 @@ import robloxtracker
 class bot(discord.Client):
   def __init__(self):
     self.auth = []
-    self.blockedservers = []
+    self.trustedservers = []
     self.uptime = time.time()
 
     print("Loading Verified Users")
@@ -17,10 +17,10 @@ class bot(discord.Client):
       for user in authlist.readlines():
         self.auth.append(int(user))
 
-    print("Loading Blocked Servers")
+    print("Loading Allowed Servers")
     with open('/home/pi/python/utilbot/settings/blockedservers.txt', 'r') as serverlist:
       for user in serverlist.readlines():
-        self.blockedservers.append(int(user))
+        self.trustedservers.append(int(user))
 
     print("Logging on...")
     super().__init__()
@@ -36,18 +36,21 @@ class bot(discord.Client):
 
   async def on_message(self, message):
     # print(message.guild.id)
-    # print(self.blockedservers)
-    # print(message.guild.id in self.blockedservers)
+    # print(self.trustedservers)
+    # print(message.guild.id in self.trustedservers)
+
+    self.ver = message.author.id in self.auth
 
     for item in set.responses:
-      if message.guild.id in self.blockedservers:
-        break
-      if item in message.content.lower():
-        await message.reply(set.responses[item])
-        print(f"{style.log} sent {style.sent}{set.responses[item]}")
-        break
-  
-    self.ver = True
+      try:
+        if message.guild.id not in self.trustedservers:
+          break
+        if item in message.content.lower():
+          await message.reply(set.responses[item])
+          print(f"{style.log} sent {style.sent}{set.responses[item]}")
+          break
+      except:
+        pass
 
     if message.content.startswith(set.prefix) and self.ver:
       print(f"{style.log} recieved command {style.command}{message.content} from {style.user}{message.author}")

@@ -13,6 +13,6 @@ async def set(args,message,self):
     vartochange = args.pop(0).replace("="," ")
 
     variables = user.connect_project(project_id=int(project)).connect_cloud_variables()
-    oldvalue = variables.get_cloud_variable_value(variable_name=vartochange,limit=1)[0]
-    variables.set_cloud_variable(variable_name=vartochange, value=" ".join(args))
+    oldvalue = variables.get_cloud_variable_value(variable_name=vartochange,limit=1)
+    variables.set_cloud_variable(variable_name=vartochange, value=args[0])
     return f"Updated var `{vartochange}` from `{oldvalue}` to `{' '.join(args)}`"

@@ -33,6 +33,7 @@ async def lag(args,message,self):
 async def spam(args,message,self):
   if not self.ver:
     return "haha no all the power is for myself"
+  await message.delete()
   amount = args.pop(0)
   msg = " ".join(args)
   for i in range(int(amount)):
