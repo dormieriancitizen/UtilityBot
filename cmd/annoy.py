@@ -1,4 +1,4 @@
-import time, math, more_itertools
+import time, math, more_itertools, asyncio
 from colorama import init, Fore, Style
 init()
 
