@@ -36,5 +36,6 @@ commandlist = {
   "chatgpt":c.chatwithgpt.chat,
   "chatwithgpt":c.chatwithgpt.chatedit,
   "everyone":c.annoy.falseeveryone,
-  "notquiteeveryone":c.annoy.untrueeveryone
+  "notquiteeveryone":c.annoy.untrueeveryone,
+  "serveroverlap":c.utils.serveroverlap
 }

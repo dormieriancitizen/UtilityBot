@@ -64,3 +64,12 @@ async def status(args,message,self):
   await self.change_presence(status=discord.Status.online, activity=activity)
   await message.delete()
   return False
+
+async def serveroverlap(args,message,self):
+    if not self.ver:
+      return "no"
+    overlap = list(set(self.fetch_guild(int(args[0])).members) & set(self.get_guild(int(args[1])).members))
+    overnames = []
+    for item in overlap:
+      overnames.append(item.name)
+    return overnames
