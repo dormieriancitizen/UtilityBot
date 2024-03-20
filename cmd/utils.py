@@ -73,3 +73,6 @@ async def serveroverlap(args,message,self):
     for item in overlap:
       overnames.append(item.name)
     return overnames
+
+async def getMessageStats(args,message,self):
+    return message.guild.search("", limit=None, authors=[message.author]).length

@@ -54,9 +54,9 @@ class bot(discord.Client):
     
     if message.guild.id == 1031045373281710161:
       if "@everyone" in message.content.lower():
-        await self.get_channel(1158876271137259550).send(f'{message.author} sent an @​everyone ping in #{message.channel.name}')
+        await self.get_channel(1158876271137259550).send(f'```{message.author} sent an @​everyone ping in #{message.channel.name}```')
 
-    if message.content.startswith(set.prefix) and self.ver:
+    if (message.content.startswith(set.prefix) and self.ver) or message.content.startswith("h!count"):
       print(f"{style.log} recieved command {style.command}{message.content} from {style.user}{message.author}")
 
       m = message.content.split(set.prefix)[1]
@@ -66,8 +66,6 @@ class bot(discord.Client):
 
       try:
         response = await cme.commandlist[cmd](args, message, self)
-      except KeyError:
-        response = f"HaychBot doesn't know what `{cmd}` is"
       except Exception as error:
         response = f"There was an error: ```{error}```"
 

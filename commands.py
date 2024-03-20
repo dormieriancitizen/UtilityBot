@@ -31,11 +31,12 @@ commandlist = {
   "stop":c.botutils.stop,
   "restart":c.botutils.restart,
   "schedule":scheduler.send,
-  "scratchset":c.scrax.set,
   "longmessage":c.annoy.longmessage,
   "chatgpt":c.chatwithgpt.chat,
   "chatwithgpt":c.chatwithgpt.chatedit,
   "everyone":c.annoy.falseeveryone,
   "notquiteeveryone":c.annoy.untrueeveryone,
-  "serveroverlap":c.utils.serveroverlap
+  "serveroverlap":c.utils.serveroverlap,
+  "getmessagestats":c.utils.getMessageStats,
+  "count":c.search.messageCounts
 }

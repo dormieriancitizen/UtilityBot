@@ -45,10 +45,9 @@ async def spoil(args,message,self):
   if not self.ver:
     return False
   msg = " ".join(args)
-  
-  await message.delete()
   sender = list(msg)
-  await message.channel.send('||'+"||||".join(sender)+"||")
+  await message.edit(content='||'+"||||".join(sender)+"||")
+  return False
 
 async def ghostping(args,message,self):
   await message.delete()
