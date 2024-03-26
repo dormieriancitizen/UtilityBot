@@ -38,5 +38,7 @@ commandlist = {
   "notquiteeveryone":c.annoy.untrueeveryone,
   "serveroverlap":c.utils.serveroverlap,
   "getmessagestats":c.utils.getMessageStats,
-  "count":c.search.messageCounts
+  "count":c.search.messageCounts,
+  "test":c.search.test,
+  "getminiscores":c.search.miniScoreTracker
 }

@@ -51,10 +51,13 @@ class bot(discord.Client):
           break
       except:
         pass
-    
-    if message.guild.id == 1031045373281710161:
-      if "@everyone" in message.content.lower():
-        await self.get_channel(1158876271137259550).send(f'```{message.author} sent an @​everyone ping in #{message.channel.name}```')
+    try:
+      if message.guild.id == 1031045373281710161:
+        if "@everyone" in message.content.lower():
+          await self.get_channel(1158876271137259550).send(f'```{message.author} sent an @​everyone ping in #{message.channel.name}```')
+    except:
+      # dm
+      pass
 
     if (message.content.startswith(set.prefix) and self.ver) or message.content.startswith("h!count"):
       print(f"{style.log} recieved command {style.command}{message.content} from {style.user}{message.author}")

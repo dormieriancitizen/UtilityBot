@@ -4,11 +4,7 @@ from colorama import Style, Fore, init
 init()
 
 async def execute(args,message,self):
-  if self.ver:
-    exec(" ".join(args))
-    return "Guillotined"
-  else:
-    return "haha no arbitary code execution is very dangerous"
+  return "no"
 
 async def ping(args,message,self):
   return "pong"
