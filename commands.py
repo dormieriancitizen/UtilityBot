@@ -40,5 +40,6 @@ commandlist = {
   "getmessagestats":c.utils.getMessageStats,
   "count":c.search.messageCounts,
   "test":c.search.test,
-  "getminiscores":c.search.miniScoreTracker
+  "getminiscores":c.search.miniScoreTracker,
+  "getchannelcounts":c.search.channelCounts
 }

@@ -6,16 +6,13 @@ with open("./config/token.txt",'r') as file:
 
 async def search(guild,args):
     while True:
-        result = requests.get(f"https://discord.com/api/v9/guilds/{guild}/messages/search?{args}",headers={"authorization":token}).json()
+        result = requests.get(f"https://discord.com/api/v9/guilds/{guild}/messages/search?{args}",headers={"authorization":token})
 
-        if "message" in result:
-            if "retry_after" in result:
-                print(f"Ratelimited for {result['retry_after']}, retrying")
-                await asyncio.sleep(int(result["retry_after"]))
-            else:
-                return result
+        if result.status_code == 429:
+            print(f"Ratelimited for {result.json()['retry_after']}, retrying")
+            await asyncio.sleep(int(result.json()["retry_after"]))
         else:
-            return result
+            return result.json()
 
 async def getAllResults(guild,args):
     initResult = await search(guild,args)
@@ -58,11 +55,50 @@ async def messageCounts(args, message, self):
     reply = ""
     for key in sorted(counts, key=counts.get, reverse=True):
         reply += f"- `{key}` has sent `{counts[key]}` messages \n"
-    await ans.edit(content=reply)
+    try:
+        await ans.edit(content=reply)
+    except:
+        try:
+            await ans.delete()
+        except:
+            pass
+        return reply
+    return False
+
+async def channelCounts(args,message,self):
+    guild = message.guild
+    counts = {}
+    ans = await message.reply("Loading...")
+    i =0
+    for channel in message.guild.text_channels:
+        i+=1
+        try:
+            response = await search(guild.id,"channel_id="+str(channel.id))
+            counts[channel.name] = response["total_results"]
+            print(f"{channel.name} : {counts[channel.name]}")
+        except Exception as error:
+            counts[channel.name] = -1
+        try:
+            await ans.edit(content=f"Loading... {i}/{len(message.guild.text_channels)}")
+        except:
+            # Even if the edit gets ratelimited, the script should keep running.
+            pass
+    
+    reply = ""
+    for key in sorted(counts, key=counts.get, reverse=True):
+        reply += f"- The channel `{key}` has `{counts[key]}` messages \n"
+    try:
+        await ans.edit(content=reply)
+    except Exception:
+        try:
+            await ans.delete()
+        except:
+            pass
+        return reply
     return False
 
 async def miniScoreTracker(args,message,self):
-    guild = 1031045373281710161
+    guild = 1225439877513084928
 
     response = "## Mini Average Scores \n"
 
@@ -77,7 +113,7 @@ async def miniScoreTracker(args,message,self):
     for member in members:
         i+=1
         toTrack = member.id
-        searchString = f"author_id={toTrack}&channel_id=1181017751607848980&content=https%3A%2F%2Fwww.nytimes.com%2Fbadges%2Fgames%2Fmini.html%3F&has=link"
+        searchString = f"author_id={toTrack}&channel_id=1225464316736573500&content=https%3A%2F%2Fwww.nytimes.com%2Fbadges%2Fgames%2Fmini.html%3F&has=link"
         responses = await getAllResults(guild, searchString)
         scores = []
 
@@ -97,6 +133,10 @@ async def miniScoreTracker(args,message,self):
     for key in sorted(scoreThingies, key=scoreThingies.get):
         response += f" - `{key}` has an average mini time of `{round(scoreThingies[key],2)}`s \n"
 
-    await toEdit.edit(content=response)
+    try:
+        await toEdit.edit(content=response)
+    except Exception:
+        await asyncio.sleep(3)
+        await toEdit.edit(content=response)   
     
     return False

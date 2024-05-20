@@ -52,9 +52,9 @@ class bot(discord.Client):
       except:
         pass
     try:
-      if message.guild.id == 1031045373281710161:
+      if message.guild.id == 1225439877513084928:
         if "@everyone" in message.content.lower():
-          await self.get_channel(1158876271137259550).send(f'```{message.author} sent an @​everyone ping in #{message.channel.name}```')
+          await self.get_channel(1225617311034249347).send(f'```{message.author} sent an @​everyone ping in #{message.channel.name}```')
     except:
       # dm
       pass
